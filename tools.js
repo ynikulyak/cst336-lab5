@@ -49,7 +49,9 @@ module.exports = {
 		  			var parseData = JSON.parse(body);
 		  			var imageURLs = [];
 		  			for(let i = 0; i < imageCount; i++){
-		  				imageURLs.push(parseData[i]["urls"]["regular"]);
+		  				if (parseData[i]) {
+		  					imageURLs.push(parseData[i]["urls"]["regular"]);
+		  				}
 		  			};
 
 		  			resolve(imageURLs);
