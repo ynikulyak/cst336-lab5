@@ -39,7 +39,12 @@ module.exports = {
 		
 		return new Promise(function(resolve, reject){
 			request(requestURL, function (error, response, body) {
-		  		
+		  		console.log("RETRIEVED BODY");
+		  		console.log(body);
+		  		console.log("RETRIEVED error");
+		  		console.log(error);
+		  		console.log("RETRIEVED response");
+		  		console.log(response);
 		  		if (!error){
 		  			var parseData = JSON.parse(body);
 		  			var imageURLs = [];
