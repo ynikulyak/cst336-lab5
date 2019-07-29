@@ -47,6 +47,7 @@ app.get("/api/updateFavorites", function(req, res){
 	connection.connect( function(err){
 		if(err) throw err;
 		connection.query(sql, sqlParams, function(err, result){
+			connection.end();
 			if(err) throw err;
 		});//query
 	}); //connection
@@ -63,9 +64,13 @@ app.get("/displayKeywords", async function(req, res){
 		if(err) throw err;
 
 		connection.query(sql, function(err, result){
-			if(err) throw err;
+			if(err) {
+				connection.end();
+				throw err
+			}
 			//pass records to the view 'favorites'
 			res.render("favorites", {"rows": result, "imageURLs": imageURLs});
+			connection.end();
 		}); //query
 	})
 
@@ -83,9 +88,13 @@ app.get("/api/displayFavorites", function(req, res){
 		if(err) throw err;
 
 		connection.query(sql, sqlParams, function(err, results){
-			if(err) throw err;
+			if(err) {
+				connection.end();
+				throw err
+			}
 			//display records that we get from database
 			res.send(results);
+			connection.end();
 		}); //query
 
 	}); //displayFavorites
